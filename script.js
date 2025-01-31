@@ -2,7 +2,9 @@ let fields = [
     "", "", "",
     "", "", "",
     "", "", ""
-]; 
+];
+
+let player = "X";
 
 function init() {
     render();
@@ -11,6 +13,7 @@ function init() {
 function render() {
     let contentDiv = document.getElementById('content');
     contentDiv.innerHTML = generiereTemplateForStartTable();
+    showPlayer();
 }
 
 function generiereTemplateForStartTable() {
@@ -22,7 +25,25 @@ function generiereTemplateForStartTable() {
 }
 
 function setValue(fieldIndex) {
-    fields[fieldIndex] = "X";
+    if (player == "X") {
+        fields[fieldIndex] = "X";
+    } else {
+        fields[fieldIndex] = "O";
+    }
+    togglePlayer();
     render();
+}
+
+function showPlayer() {
+    let playerXO = document.getElementById('playerXO');
+    playerXO.innerHTML = player;
+}
+
+function togglePlayer() {
+    if (player == "X") {
+        player = "O";
+    } else {
+        player = "X";
+    }
 }
 
