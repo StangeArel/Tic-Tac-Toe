@@ -1,16 +1,100 @@
-.board {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    gap: 5px;
+:root {
+    --dark-blue: rgb(3, 73, 101);
+    --cross-red: rgb(255, 94, 0);
+    --circle-gold: rgb(217, 183, 14);
+    --heading-color: rgb(139, 27, 219);
+    --light-blue: rgb(79, 130, 149);
+    --black: rgb(10, 10, 10);
 }
-.cell {
+
+/* Allgemeines Styling für die Seite */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--dark-blue);
+    margin: 0;
+}
+
+/* Titel des Spiels */
+h1 {
+    color: var(--heading-color);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Nachricht für den aktuellen Spieler */
+#message {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background-color: var(--black);
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Tabelle für das Spielbrett */
+table {
+    border-collapse: collapse;
+    background-color: var(--black);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Zeilen des Spielbretts */
+tr {
+    height: 100px;
+}
+
+/* Zellen des Spielbretts */
+td {
     width: 100px;
     height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2em;
-    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--circle-gold);
+    background-color: var(--light-blue);
+    border: 2px solid var(--black);
     cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+/* Hover-Effekt für die Zellen */
+td:hover {
+    background-color: rgba(217, 183, 14, 0.3); /* Gold-Hervorhebung */
+    transform: scale(1.05);
+}
+
+/* Neustart-Button */
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: var(--circle-gold);
+    color: var(--black);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover-Effekt für den Neustart-Button */
+button:hover {
+    background-color: var(--cross-red);
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Klick-Effekt für den Neustart-Button */
+button:active {
+    transform: scale(0.95);
 }

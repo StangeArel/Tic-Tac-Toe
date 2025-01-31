@@ -1,51 +1,28 @@
 let fields = [
-    'circle',
-    'circle',
-    'circle',
-    null,
-    'cross',
-    'cross',
-    null,
-    'circle',
-    null
-];
+    "", "", "",
+    "", "", "",
+    "", "", ""
+]; 
 
 function init() {
     render();
 }
 
 function render() {
-    let board = document.getElementById('content');
-    board.innerHTML = '';
-    createCells(board);
+    let contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = generiereTemplateForStartTable();
 }
 
-function createCells(board) {
-    for (let i = 0; i < fields.length; i++) {
-        let cell = createCell(i);
-        board.appendChild(cell);
-    }
+function generiereTemplateForStartTable() {
+    return `<table>
+                <tr><td onclick="setValue(0)">${fields[0]}</td><td onclick="setValue(1)">${fields[1]}</td><td onclick="setValue(2)">${fields[2]}</td></tr>
+                <tr><td onclick="setValue(3)">${fields[3]}</td><td onclick="setValue(4)">${fields[4]}</td><td onclick="setValue(5)">${fields[5]}</td></tr>
+                <tr><td onclick="setValue(6)">${fields[6]}</td><td onclick="setValue(7)">${fields[7]}</td><td onclick="setValue(8)">${fields[8]}</td></tr>
+            </table>`;
 }
 
-function createCell(index) {
-    let cell = document.createElement('div');
-    cell.classList.add('cell');
-    setCellContent(cell, index);
-    cell.addEventListener('click', () => markField(index));
-    return cell;
+function setValue(fieldIndex) {
+    fields[fieldIndex] = "X";
+    render();
 }
 
-function setCellContent(cell, index) {
-    if (fields[index] === 'cross') {
-        cell.textContent = 'X';
-    } else if (fields[index] === 'circle') {
-        cell.textContent = 'O';
-    }
-}
-
-function markField(index) {
-    if (!fields[index]) {
-        fields[index] = 'cross';
-        render();
-    }
-}
