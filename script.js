@@ -25,6 +25,16 @@ function generiereTemplateForStartTable() {
 }
 
 function setValue(fieldIndex) {
+/*     if (fields[fieldIndex] == "") {
+        if (player == "X") {
+            fields[fieldIndex] = "X";
+        } else if (player == "O") {
+            fields[fieldIndex] = "O";
+        }
+        togglePlayer();
+        render();
+    } */
+
     if (player == "X" && fields[fieldIndex] == "") {
         fields[fieldIndex] = "X";
         togglePlayer();
