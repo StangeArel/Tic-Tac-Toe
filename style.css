@@ -1,100 +1,96 @@
-:root {
-    --dark-blue: rgb(3, 73, 101);
-    --cross-red: rgb(255, 94, 0);
-    --circle-gold: rgb(217, 183, 14);
-    --heading-color: rgb(139, 27, 219);
-    --light-blue: rgb(79, 130, 149);
-    --black: rgb(10, 10, 10);
-}
-
-/* Allgemeines Styling für die Seite */
+/* Gesamtes Dokument */
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: var(--dark-blue);
-    margin: 0;
-}
-
-/* Titel des Spiels */
-h1 {
-    color: var(--heading-color);
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-/* Nachricht für den aktuellen Spieler */
-#message {
-    font-size: 1.2rem;
-    font-weight: bold;
+    justify-content: center; /* Zentriert horizontal */
+    align-items: center; /* Zentriert vertikal */
+    height: 100vh; /* 100% der Höhe des Bildschirms */
+    background-color: #034965;
     color: white;
-    background-color: var(--black);
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    margin: 0;
+    padding: 0;
     text-align: center;
+    flex-direction: column; /* Elemente untereinander anordnen */
 }
 
-/* Tabelle für das Spielbrett */
-table {
-    border-collapse: collapse;
-    background-color: var(--black);
-    border-radius: 8px;
-    overflow: hidden;
+h1 {
+    color: #d9b70e;
+    margin-bottom: 10px;
 }
 
-/* Zeilen des Spielbretts */
-tr {
-    height: 100px;
+h2 {
+    margin: 10px 0;
 }
 
-/* Zellen des Spielbretts */
-td {
+/* Farbe für X */
+.x {
+    color: #ff5e00; /* Orange */
+    font-weight: bold;
+}
+
+/* Farbe für O */
+.o {
+    color: #d9b70e; /* Gold */
+    font-weight: bold;
+}
+
+
+#content table {
+    margin: 20px auto;
+    border-collapse: collapse; /* Entfernt Doppellinien */
+}
+
+#content td {
     width: 100px;
     height: 100px;
     text-align: center;
     vertical-align: middle;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--circle-gold);
-    background-color: var(--light-blue);
-    border: 2px solid var(--black);
+    font-size: 2rem;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    background-color: #034965;
+    color: #d9b70e;
+    border: none; /* Entfernt alle Ränder */
 }
 
-/* Hover-Effekt für die Zellen */
-td:hover {
-    background-color: rgba(217, 183, 14, 0.3); /* Gold-Hervorhebung */
-    transform: scale(1.05);
+/* Innere Linien */
+#content td:not(:last-child) {
+    border-right: 2px solid white; /* Weiße Linien rechts */
 }
 
-/* Neustart-Button */
+#content tr:not(:last-child) td {
+    border-bottom: 2px solid white; /* Weiße Linien unten */
+}
+
+#content td:hover {
+    background-color: #d9b70e;
+    color: black;
+}
+
 button {
     margin-top: 20px;
     padding: 10px 20px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    background-color: var(--circle-gold);
-    color: var(--black);
+    font-size: 1rem;
+    background-color: #d9b70e;
+    color: black;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    transition: 0.3s ease;
 }
 
-/* Hover-Effekt für den Neustart-Button */
 button:hover {
-    background-color: var(--cross-red);
+    background-color: #ff5e00;
     color: white;
-    transform: scale(1.05);
 }
 
-/* Klick-Effekt für den Neustart-Button */
-button:active {
-    transform: scale(0.95);
+#playerXO {
+    color: #ff5e00;
+}
+
+.winning-cell {
+    background-color: white; /* Gewinnerzellen haben weißen Hintergrund */
+    color: black; /* Textfarbe ändern */
+    font-weight: bold; /* Text fett anzeigen */
+    transition: background-color 0.3s ease; /* Sanfter Übergang */
 }
