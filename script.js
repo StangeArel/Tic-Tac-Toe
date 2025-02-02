@@ -15,6 +15,7 @@ const winPatterns = [
     [2, 4, 6]
 ];
 
+let gameOver = false;
 let player = "X";
 
 function init() {
@@ -36,16 +37,25 @@ function generiereTemplateForStartTable() {
 }
 
 function setValue(fieldIndex) {
-    if (fields[fieldIndex] == "") {
+    if (fields[fieldIndex] == "" && !gameOver) {
         if (player == "X") {
             fields[fieldIndex] = "X";
         } else if (player == "O") {
             fields[fieldIndex] = "O";
         }
-        if (!checkWinner()) {
+
+        let winFields = checkWinner();
+
+        if (winFields === false) {
             togglePlayer();
         }
+
         render();
+
+        if (winFields) {
+            highlightWinFields(winFields);
+            gameOver = true;
+        }
     }
 }
 
@@ -70,22 +80,38 @@ function checkWinner() {
         let c = onePattern[2];
 
         if (fields[a] !== "" && fields[a] === fields[b] && fields[b] === fields[c]) {
-            document.getElementById(`cell-${a}`).classList.add("winning-cell");
-            document.getElementById(`cell-${b}`).classList.add("winning-cell");
-            document.getElementById(`cell-${c}`).classList.add("winning-cell");
             showMessage(`🎉 Spieler ${fields[a]} hat gewonnen!`);
-            return true;
+            return onePattern;
         }
         if (!fields.includes("")) {
             showMessage("🤝 Unentschieden!");
-            return true;
+            return onePattern;
         }
     }
     return false;
 }
 
+function highlightWinFields (onePattern) {
+    let a = onePattern[0];
+    let b = onePattern[1];
+    let c = onePattern[2];
+    document.getElementById(`cell-${a}`).classList.add("winning-cell");
+    document.getElementById(`cell-${b}`).classList.add("winning-cell");
+    document.getElementById(`cell-${c}`).classList.add("winning-cell");
+}
 
 function showMessage(message) {
     let messageElement = document.getElementById('message');
     messageElement.innerHTML = message;
+}
+
+function resetGame() {
+    fields = ["", "", "", "", "", "", "", "", ""];
+    let gameOver = false;
+    let player = "X";
+    showMessage("");
+    for (let i = 0; i < 9; i++) {
+        document.getElementById(`cell-${i}`).classList.add("winning-cell");
+    }
+    render();
 }
