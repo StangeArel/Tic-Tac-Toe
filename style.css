@@ -1,20 +1,28 @@
-/* Gesamtes Dokument */
+:root {
+--BC-dark-blue: rgb(3, 73, 101);
+--BC-white: rgb(255, 255, 255);
+--BC-gold-yellow: rgb(217, 183, 14); 
+--BC-dark-orange: rgb(255, 94, 0);
+--BC-black: rgb(0, 0, 0);;
+--BC-neu-color: rgb(222, 197, 107);
+}
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center; /* Zentriert horizontal */
-    align-items: center; /* Zentriert vertikal */
-    height: 100vh; /* 100% der Höhe des Bildschirms */
-    background-color: #034965;
-    color: white;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--BC-dark-blue);
+    color: var(--BC-white);
     margin: 0;
     padding: 0;
     text-align: center;
-    flex-direction: column; /* Elemente untereinander anordnen */
+    flex-direction: column;
 }
 
 h1 {
-    color: #d9b70e;
+    color: var(--BC-gold-yellow);
     margin-bottom: 10px;
 }
 
@@ -22,22 +30,19 @@ h2 {
     margin: 10px 0;
 }
 
-/* Farbe für X */
 .x {
-    color: #ff5e00; /* Orange */
+    color: var(--BC-dark-orange);
     font-weight: bold;
 }
 
-/* Farbe für O */
 .o {
-    color: #d9b70e; /* Gold */
+    color: var(--BC-gold-yellow);
     font-weight: bold;
 }
-
 
 #content table {
     margin: 20px auto;
-    border-collapse: collapse; /* Entfernt Doppellinien */
+    border-collapse: collapse;
 }
 
 #content td {
@@ -47,31 +52,30 @@ h2 {
     vertical-align: middle;
     font-size: 2rem;
     cursor: pointer;
-    background-color: #034965;
-    color: #d9b70e;
-    border: none; /* Entfernt alle Ränder */
+    background-color: var(--BC-dark-blue);
+    color: var(--BC-gold-yellow);
+    border: none;
 }
 
-/* Innere Linien */
 #content td:not(:last-child) {
-    border-right: 2px solid white; /* Weiße Linien rechts */
+    border-right: 2px solid var(--BC-white);
 }
 
 #content tr:not(:last-child) td {
-    border-bottom: 2px solid white; /* Weiße Linien unten */
+    border-bottom: 2px solid var(--BC-white);
 }
 
 #content td:hover {
-    background-color: #d9b70e;
-    color: black;
+    background-color: var(--BC-neu-color);
+    color: var(--BC-dark-orange);
 }
 
 button {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 1rem;
-    background-color: #d9b70e;
-    color: black;
+    background-color: var(--BC-gold-yellow);
+    color: var(--BC-black);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -80,17 +84,51 @@ button {
 }
 
 button:hover {
-    background-color: #ff5e00;
-    color: white;
+    background-color: var(--BC-dark-orange);
+    color: var(--BC-white);
 }
 
 #playerXO {
-    color: #ff5e00;
+    color: var(--BC-dark-orange);
 }
 
 .winning-cell {
-    background-color: white !important;
-    color: #ff5e00 !important; 
+    background-color: var(--BC-white) !important;
+    color: var(--BC-dark-orange) !important; 
     font-weight: bold; 
     transition: background-color 0.3s ease;
+}
+
+
+/* Animation für X */
+@keyframes animateX {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Animation für O */
+@keyframes animateO {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Klassen für die Animationen */
+.cell-x {
+    animation: animateX 0.3s ease-out;
+}
+
+.cell-o {
+    animation: animateO 0.3s ease-out;
 }

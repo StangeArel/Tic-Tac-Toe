@@ -39,9 +39,10 @@ function generiereTemplateForStartTable() {
 function setValue(fieldIndex) {
     if (fields[fieldIndex] == "" && !gameOver) {
         if (player == "X") {
-            fields[fieldIndex] = "X";
+            fields[fieldIndex] = generateAnimatedCross();
         } else if (player == "O") {
-            fields[fieldIndex] = "O";
+            fields[fieldIndex] = generateAnimatedSVG();
+
         }
 
         let winFields = checkWinner();
@@ -80,12 +81,12 @@ function checkWinner() {
         let c = onePattern[2];
 
         if (fields[a] !== "" && fields[a] === fields[b] && fields[b] === fields[c]) {
-            showMessage(`🎉 Spieler ${fields[a]} hat gewonnen!`);
+            showMessage(`🎉 Spieler <span id="playerXO">${fields[a]}</span> hat gewonnen!`);
             return onePattern;
         }
         if (!fields.includes("")) {
             showMessage("🤝 Unentschieden!");
-            return onePattern;
+            return;
         }
     }
     return false;
@@ -107,11 +108,34 @@ function showMessage(message) {
 
 function resetGame() {
     fields = ["", "", "", "", "", "", "", "", ""];
-    let gameOver = false;
-    let player = "X";
+    gameOver = false;
+    player = "X";
     showMessage("");
     for (let i = 0; i < 9; i++) {
-        document.getElementById(`cell-${i}`).classList.add("winning-cell");
+        document.getElementById(`cell-${i}`).classList.remove("winning-cell");
     }
     render();
+}
+
+function generateAnimatedSVG(size = 60, color = "rgb(255, 94, 0)") {
+    return `
+        <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="${size / 2}" cy="${size / 2}" r="${size / 2 - 5}" fill="none" stroke="${color}" stroke-width="8" stroke-linecap="round" stroke-dasharray="157 157" stroke-dashoffset="157">
+                <animate attributeName="stroke-dashoffset" from="157" to="0" dur="0.8s" fill="freeze" />
+            </circle>
+        </svg>
+    `;
+}
+
+function generateAnimatedCross(size = 60, color = "rgb(217, 183, 14)") {
+    return `
+        <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="10" x2="${size - 10}" y2="${size - 10}" stroke="${color}" stroke-width="8" stroke-linecap="round" stroke-dasharray="85" stroke-dashoffset="85">
+                <animate attributeName="stroke-dashoffset" from="85" to="0" dur="0.8s" fill="freeze" />
+            </line>
+            <line x1="${size - 10}" y1="10" x2="10" y2="${size - 10}" stroke="${color}" stroke-width="8" stroke-linecap="round" stroke-dasharray="85" stroke-dashoffset="85">
+                <animate attributeName="stroke-dashoffset" from="85" to="0" dur="0.8s" fill="freeze" />
+            </line>
+        </svg>
+    `;
 }
